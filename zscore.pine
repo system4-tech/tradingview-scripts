@@ -1,0 +1,18 @@
+//@version=6
+indicator("Z-Score")
+
+int length = input.int(20, "Length / Lookback Period", minval=1)
+
+float stdev = ta.stdev(close, length)
+float sma = ta.sma(close, length)
+float zscore = (close - sma) / stdev
+
+plot(zscore, "Z-Score", color.blue, 1, display=(display.all - display.status_line))
+
+hline(0, "", color.orange, hline.style_solid, 1, true)
+hline(-2, "", color.blue, hline.style_dashed, 1, true)
+hline(-2.5, "", color.blue, hline.style_dashed, 1, true)
+hline(-3, "", color.blue, hline.style_dashed, 1, true)
+hline(2, "", color.blue, hline.style_dashed, 1, true)
+hline(2.5, "", color.blue, hline.style_dashed, 1, true)
+hline(3, "", color.blue, hline.style_dashed, 1, true)
